@@ -6,7 +6,6 @@ namespace MGDK.Util
 	[System.Serializable]
 	public class ObjectPoolItem
 	{
-
 		public GameObject objectToPool;
 		public int amountToPool;
 		public bool shouldExpand = true;
@@ -23,37 +22,28 @@ namespace MGDK.Util
 	{
 		public static ObjectPooler SharedInstance;
 		public List<ObjectPoolItem> itemsToPool;
-
-
 		public List<List<GameObject>> pooledObjectsList;
 		public List<GameObject> pooledObjects;
 		private List<int> positions;
 
 		void Awake()
 		{
-
 			SharedInstance = this;
-
 			pooledObjectsList = new List<List<GameObject>>();
 			pooledObjects = new List<GameObject>();
 			positions = new List<int>();
-
 
 			for (int i = 0; i < itemsToPool.Count; i++)
 			{
 				ObjectPoolItemToPooledObject(i);
 			}
-
 		}
-
 
 		public GameObject GetPooledObject(int index)
 		{
-
 			int curSize = pooledObjectsList[index].Count;
 			for (int i = positions[index] + 1; i < positions[index] + pooledObjectsList[index].Count; i++)
 			{
-
 				if (!pooledObjectsList[index][i % curSize].activeInHierarchy)
 				{
 					positions[index] = i % curSize;
@@ -63,13 +53,11 @@ namespace MGDK.Util
 
 			if (itemsToPool[index].shouldExpand)
 			{
-
 				GameObject obj = (GameObject)Instantiate(itemsToPool[index].objectToPool);
 				obj.SetActive(false);
 				obj.transform.parent = this.transform;
 				pooledObjectsList[index].Add(obj);
 				return obj;
-
 			}
 			return null;
 		}
@@ -79,7 +67,6 @@ namespace MGDK.Util
 			return pooledObjectsList[index];
 		}
 
-
 		public int AddObject(GameObject GO, int amt = 3, bool exp = true)
 		{
 			ObjectPoolItem item = new ObjectPoolItem(GO, amt, exp);
@@ -88,7 +75,6 @@ namespace MGDK.Util
 			ObjectPoolItemToPooledObject(currLen);
 			return currLen;
 		}
-
 
 		void ObjectPoolItemToPooledObject(int index)
 		{
@@ -104,7 +90,6 @@ namespace MGDK.Util
 			}
 			pooledObjectsList.Add(pooledObjects);
 			positions.Add(0);
-
 		}
 	}
 }
