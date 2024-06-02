@@ -1,0 +1,13 @@
+{
+  "name": "com.mgdk.util",
+  "version": "1.0.0",
+  "displayName": "MGDK-Util",
+  "description": "This package contains all utility scripts and prefabs for MGDK.",
+  "unity": "2022.3",
+  "unityRelease": "26f1",
+  "author": {
+    "name": "Morgan James",
+    "email": "morganhmjames@gmail.com",
+    "url": "https://morganjames.dev"
+  }
+}
